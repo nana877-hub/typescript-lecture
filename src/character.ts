@@ -15,9 +15,9 @@ export abstract class Character {
     this.hp = this.hp - damage;
   }
 
-  isDead():boolean {
-    return this.hp < 0  
+  isDead(): boolean {
+    return this.hp <= 0;
   }
 
-  abstract attack(opponent: Character): void{
-  }
+  abstract attack(opponent: Character): void;
+}
