@@ -15,9 +15,11 @@ export abstract class Character {
     this.hp = this.hp - damage;
   }
 
+  // hpが0以下かどうかを返す
   isDead(): boolean {
     return this.hp <= 0;
   }
 
+  //攻撃する相手を引数に取る 抽象メソッドなので中身はなし
   abstract attack(opponent: Character): void;
 }

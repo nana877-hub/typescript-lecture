@@ -8,7 +8,7 @@ export class Warrior extends Character {
     this.weapon = weapon;
   }
 
-  override attack(opponent: Character) {
+  attack(opponent: Character) {
     console.log(`${this.name}は${this.weapon}で攻撃した！`);
 
     // TODO: opponent の hp を power だけ減らす
