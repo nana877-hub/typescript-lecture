@@ -40,6 +40,7 @@ while (!slime.isDead() && !warrior.isDead()) {
 
   // スライムが倒れていたら戦闘終了
   if (slime.isDead()) {
+    console.log(`${slime.name}を倒した`);
     break;
   }
 
@@ -48,6 +49,7 @@ while (!slime.isDead() && !warrior.isDead()) {
 
   // アーサーが倒れていたら戦闘終了
   if (warrior.isDead()) {
+    console.log(`${warrior.name}は倒れた...`);
     break;
   }
 }
