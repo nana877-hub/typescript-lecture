@@ -3,16 +3,17 @@ import type { Healable } from "./healable";
 import type { Reviveable } from "./reviveable";
 
 // extends , implements を正しく設定する
-export class HolyPriest extends XXX implements XXX {
+export class HolyPriest extends Character implements Healable, Reviveable {
   attack() {
-    // 実装する
+    // 攻撃できないログを出す
+    console.log(`${this.name}は攻撃できない`);
   }
 
   heal(target: Character) {
-    // 実装する
+    target.takeHeal(15);
   }
 
   revive(target: Character) {
-    // 実装する
+    target.isDead();
   }
 }
