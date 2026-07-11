@@ -5,7 +5,7 @@ export class Mage extends Character {
 
   constructor(name: string, hp: number) {
     super(name, hp); // super() <- 継承元 (character) の constructor
-    this.power = this.power;
+    this.power = 10;
   }
 
   attack(opponent: Character) {

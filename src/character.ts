@@ -1,7 +1,6 @@
 export abstract class Character {
-  protected name: string; // インスタンスからはアクセス出来ないが、継承先からはアクセスできる
-  protected hp: number; // インスタンスからも継承先からもアクセス出来ない
-
+  public readonly name: string; // インスタンスからはアクセス出来ないが、継承先からはアクセスできる
+  protected hp: number;
   constructor(name: string, hp: number) {
     this.name = name;
     this.hp = hp;
@@ -13,6 +12,9 @@ export abstract class Character {
 
   public takeDamage(damage: number): void {
     this.hp = this.hp - damage;
+    if (this.hp < 0) {
+      this.hp = 0;
+    }
   }
 
   // hpが0以下かどうかを返す

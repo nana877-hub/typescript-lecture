@@ -7,7 +7,7 @@ export class Warrior extends Character {
   constructor(name: string, hp: number, weapon: string) {
     super(name, hp); // super() <- 継承元 (character) の constructor
     this.weapon = weapon;
-    this.power = this.power;
+    this.power = 20;
   }
 
   attack(opponent: Character) {
