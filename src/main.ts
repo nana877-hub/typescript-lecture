@@ -4,6 +4,7 @@ import { Mage } from "./mage";
 import { Warrior } from "./warrior";
 import { Enemy } from "./enemy";
 import { Archer } from "./archer";
+import { Priest } from "./priest";
 
 //　登場人物を作る
 const warrior = new Warrior("アーサー", 100, "エクスカリバー");
@@ -19,6 +20,9 @@ archer.showStatus();
 
 const slime = new Enemy("スライム", 50);
 slime.showStatus();
+
+const priest = new Priest("アリス", 100);
+priest.showStatus();
 
 // 戦闘開始！
 // warrior.attack(slime); //「誰を攻撃するの？」 を渡さないといけなくなった！

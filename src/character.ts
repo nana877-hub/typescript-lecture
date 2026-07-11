@@ -17,6 +17,10 @@ export abstract class Character {
     }
   }
 
+  public takeHeal(amount: number) {
+    this.hp += amount;
+  }
+
   // hpが0以下かどうかを返す
   isDead(): boolean {
     return this.hp <= 0;
