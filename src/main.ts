@@ -5,6 +5,7 @@ import { Warrior } from "./warrior";
 import { Enemy } from "./enemy";
 import { Archer } from "./archer";
 import { Priest } from "./priest";
+import { HolyPriest } from "./holy-priest";
 
 //　登場人物を作る
 const warrior = new Warrior("アーサー", 100, "エクスカリバー");
@@ -57,3 +58,36 @@ while (!slime.isDead() && !warrior.isDead()) {
     break;
   }
 }
+
+// 課題インターフェイス
+const villain = new Enemy("ヴィラン", 100);
+villain.showStatus();
+
+const holyPriest = new HolyPriest("セシル", 100);
+
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+villain.attack(warrior);
+warrior.showStatus();
+
+holyPriest.revive(warrior);
+warrior.showStatus();
+holyPriest.revive(warrior);
