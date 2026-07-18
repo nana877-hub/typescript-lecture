@@ -1,93 +1,67 @@
-// main.tsは、ゲームを進行する場所
-
-import { Mage } from "./mage";
-import { Warrior } from "./warrior";
+import type { Character } from "./character";
 import { Enemy } from "./enemy";
-import { Archer } from "./archer";
-import { Priest } from "./priest";
-import { HolyPriest } from "./holy-priest";
+import { Magician } from "./magician";
+import { Warrior } from "./warrior";
 
-//　登場人物を作る
+const enemy = new Enemy("ドラゴン", 200);
 const warrior = new Warrior("アーサー", 100, "エクスカリバー");
-warrior.showStatus();
+const magician = new Magician("メディア", 80);
 
-//　＊ここにwarrior.attack(slime);を書いても、「slimeって何？？」ってなる
+// 味方パーティを「共通の型」の配列でまとめる
+const party: Character[] = [warrior, magician];
+let battleOver = false;
 
-const mage = new Mage("メディア", 80);
-mage.showStatus();
-
-const archer = new Archer("レオン", 100, 10);
-archer.showStatus();
-
-const slime = new Enemy("スライム", 50);
-slime.showStatus();
-
-const priest = new Priest("アリス", 100);
-priest.showStatus();
-
-// 戦闘開始！
-// warrior.attack(slime); //「誰を攻撃するの？」 を渡さないといけなくなった！
-// slime.showStatus();
-
-// mage.attack(slime);
-// slime.showStatus();
-
-// archer.attack(slime);
-// slime.showStatus();
-
-// slime.attack(warrior);
-// warrior.showStatus();
-
-// どちらかが倒れる(isDead)まで戦闘を繰り返す
-while (!slime.isDead() && !warrior.isDead()) {
-  warrior.attack(slime);
-  slime.showStatus();
-
-  // スライムが倒れていたら戦闘終了
-  if (slime.isDead()) {
-    console.log(`${slime.name}を倒した`);
-    break;
+while (true) {
+  // TODO 1: 味方の攻撃 — for...of で party を回し、
+  //         生存している (isDead() でない) 味方だけが enemy を攻撃する
+  for (const member of party) {
+    console.log(member);
+    if (!member.isDead()) {
+      member.attack(enemy);
+    }
+    // TODO 2: 敵が倒れていたら「ドラゴンを倒した！」と表示して終了
+    if (enemy.isDead()) {
+      battleOver = true;
+      console.log(`${enemy.name}を倒した！`);
+      break;
+    }
   }
-
-  slime.attack(warrior);
-  warrior.showStatus();
-
-  // アーサーが倒れていたら戦闘終了
-  if (warrior.isDead()) {
-    console.log(`${warrior.name}は倒れた...`);
-    break;
-  }
+  if (battleOver) break;
 }
 
-// 課題インターフェイス
-const villain = new Enemy("ヴィラン", 100);
-villain.showStatus();
+// TODO 3: 敵の反撃 — 生存している味方(最初の1人でOK)に attack
+const aliveParty = party.filter((m) => !m.isDead());
+enemy.attack(aliveParty[0]);
 
-const holyPriest = new HolyPriest("セシル", 100);
+// TODO 4: 味方が全滅していたら「パーティは全滅した...」と表示して終了
+//         ヒント: party.every((m) => m.isDead())
+if (party.every((m) => m.isDead())) {
+  console.log("パーティは全滅した");
+}
 
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
-villain.attack(warrior);
-warrior.showStatus();
+// TODO 5: 全員の showStatus()
+for (const member of party) {
+  member.showStatus();
+}
+enemy.showStatus();
 
-holyPriest.revive(warrior);
-warrior.showStatus();
-holyPriest.revive(warrior);
+// どちらかが倒れる(isDead)まで戦闘を繰り返す
+// while (!slime.isDead() && !warrior.isDead()) {
+//   warrior.attack(slime);
+//   slime.showStatus();
+
+//   // スライムが倒れていたら戦闘終了
+//   if (slime.isDead()) {
+//     console.log(`${slime.name}を倒した`);
+//     break;
+//   }
+
+//   slime.attack(warrior);
+//   warrior.showStatus();
+
+//   // アーサーが倒れていたら戦闘終了
+//   if (warrior.isDead()) {
+//     console.log(`${warrior.name}は倒れた...`);
+//     break;
+//   }
+// }
